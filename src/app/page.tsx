@@ -119,8 +119,55 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      {/* PRINCIPLES */}
+      {/* HOW WE WORK */}
       <section className="py-24 sm:py-32 px-6 bg-navy-light">
+        <FadeIn className="max-w-6xl mx-auto">
+          <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4 text-center">
+            How We Work
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6">
+            More than software. A complete transformation.
+          </h2>
+          <p className="text-gray-400 text-center max-w-2xl mx-auto mb-16 text-lg">
+            We don&apos;t just hand you a login. We bring decades of fitness and
+            technology expertise to every engagement — from strategy through
+            implementation.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Strategic Advisory",
+                desc: "Tech audits, vendor assessments, and data architecture roadmaps. We start by deeply understanding your operation — then chart the path forward.",
+              },
+              {
+                step: "02",
+                title: "Best Practices & Playbooks",
+                desc: "Proven frameworks for member experience, retention, and operational intelligence. Not theory — built from real operator engagements.",
+              },
+              {
+                step: "03",
+                title: "Platform & Starter Architecture",
+                desc: "Reference implementations and an AI-native foundation you own. Not another vendor lock-in — infrastructure you control and customize.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="bg-navy border border-white/10 rounded-2xl p-8 hover:border-electric/30 transition-colors"
+              >
+                <div className="text-electric text-sm font-mono font-bold mb-4">
+                  {card.step}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{card.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* PRINCIPLES */}
+      <section className="py-24 sm:py-32 px-6">
         <FadeIn className="max-w-6xl mx-auto">
           <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4 text-center">
             Built Different
