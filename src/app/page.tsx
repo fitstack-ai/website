@@ -185,7 +185,7 @@ export default function Home() {
               {
                 title: "Agent-Ready",
                 desc: "Built for AI agents, not just human interfaces. When the UI disappears, your platform keeps working.",
-                icon: "⬡",
+                icon: "◇",
               },
               {
                 title: "Context-Native",
