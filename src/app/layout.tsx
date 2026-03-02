@@ -10,7 +10,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FitStack AI — AI-Native Operating Infrastructure for Fitness",
   description:
-    "The data and intelligence layer gym operators need as AI transforms how businesses run. Interfaces come and go. Data remains.",
+    "We build the data and intelligence foundation gym operators need to lead in the AI era. Interfaces evolve. Data endures.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "FitStack AI",
     description: "AI-native operating infrastructure for the fitness industry.",
