@@ -67,7 +67,7 @@ export default function Home() {
           </h1>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
             We build the data and intelligence foundation gym operators
-            depend on in the AI era.{" "}
+            need to lead in the AI era.{" "}
             <span className="text-white font-medium">
               Interfaces evolve. Data endures.
             </span>
