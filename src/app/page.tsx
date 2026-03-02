@@ -47,10 +47,10 @@ export default function Home() {
             priority
           />
           <a
-            href="#waitlist"
+            href="#contact"
             className="hidden sm:inline-block text-sm font-medium px-5 py-2 rounded-full bg-electric hover:bg-electric-hover transition-colors"
           >
-            Join the Waitlist
+            Get in Touch
           </a>
         </div>
       </nav>
@@ -73,10 +73,10 @@ export default function Home() {
             </span>
           </p>
           <a
-            href="#waitlist"
+            href="#contact"
             className="inline-block text-lg font-semibold px-8 py-4 rounded-full bg-electric hover:bg-electric-hover transition-colors shadow-lg shadow-electric/20"
           >
-            Join the Waitlist
+            Get in Touch
           </a>
         </div>
         {/* Subtle gradient fade at bottom */}
@@ -206,44 +206,28 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      {/* WAITLIST */}
-      <section id="waitlist" className="py-24 sm:py-32 px-6">
+      {/* CONTACT */}
+      <section id="contact" className="py-24 sm:py-32 px-6">
         <FadeIn className="max-w-xl mx-auto text-center">
           <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4">
-            Early Access
+            Ready to Own Your Data?
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Building in stealth.
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            Let&apos;s build something
             <br />
-            Be first to know.
+            you actually own.
           </h2>
-          <p className="text-gray-400 mb-10">
-            We&apos;re working with select operators to build something that
-            matters. Drop your email to stay in the loop.
+          <p className="text-gray-400 mb-10 text-lg leading-relaxed">
+            We help gym operators audit their tech stack, build a data strategy,
+            and deploy infrastructure they actually control. No vendor lock-in.
+            Your platform, your rules.
           </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.target as HTMLFormElement;
-              const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-              window.location.href = `mailto:hello@fitstack.ai?subject=Waitlist%20Request&body=I'd%20like%20to%20join%20the%20FitStack%20AI%20waitlist.%0A%0AEmail:%20${encodeURIComponent(email)}`;
-            }}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+          <a
+            href="mailto:hello@fitstack.ai?subject=Let's%20Talk"
+            className="inline-block px-10 py-4 rounded-full bg-electric hover:bg-electric-hover text-lg font-semibold transition-colors shadow-lg shadow-electric/20"
           >
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="you@gym.com"
-              className="flex-1 px-5 py-3 rounded-full bg-navy-light border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:border-electric transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-8 py-3 rounded-full bg-electric hover:bg-electric-hover font-semibold transition-colors shadow-lg shadow-electric/20"
-            >
-              Get Early Access
-            </button>
-          </form>
+            Get in Touch
+          </a>
         </FadeIn>
       </section>
 
