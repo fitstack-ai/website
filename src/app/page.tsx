@@ -92,7 +92,7 @@ export default function Home() {
                 The Problem
               </p>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight">
-                Gym operators are losing their data.
+                Operators don't control their data.
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed">
                 Fragmented vendor stacks. Siloed systems. Every tool owns a
