@@ -66,10 +66,10 @@ export default function Home() {
             <span className="text-electric">fitness industry</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            We&apos;re building the data and intelligence layer gym operators need
-            as AI transforms how businesses run.{" "}
+            We build the data and intelligence foundation gym operators
+            depend on in the AI era.{" "}
             <span className="text-white font-medium">
-              Interfaces come and go. Data remains.
+              Interfaces evolve. Data endures.
             </span>
           </p>
           <a
