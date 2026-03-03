@@ -213,7 +213,7 @@ export default function Home() {
             Take Control
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Own your technology stack.
+            Own your tech stack.
             <br />
             Stop letting it own you.
           </h2>
