@@ -210,12 +210,12 @@ export default function Home() {
       <section id="contact" className="py-24 sm:py-32 px-6">
         <FadeIn className="max-w-xl mx-auto text-center">
           <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4">
-            Ready to Own Your Data?
+            Take Control
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Let&apos;s build something
+            Own your technology stack.
             <br />
-            you actually own.
+            Stop letting it own you.
           </h2>
           <p className="text-gray-400 mb-10 text-lg leading-relaxed">
             We help gym operators audit their tech stack, build a data strategy,
