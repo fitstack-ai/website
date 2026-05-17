@@ -25,7 +25,7 @@ export default function TermsPage() {
             </h1>
             <p className="text-sm text-gray-500">
               <span className="text-gray-400 font-medium">Effective date:</span>{" "}
-              April 11, 2026
+              May 16, 2026
             </p>
           </header>
 
@@ -100,12 +100,12 @@ export default function TermsPage() {
                   apply
                 </li>
                 <li>
-                  <strong>Opt-out:</strong> Reply <strong>STOP</strong> to cancel
-                  SMS messages
+                  <strong>Opt-out:</strong> Reply <strong>STOP</strong>{" "}
+                  to cancel SMS messages
                 </li>
                 <li>
-                  <strong>Help:</strong> Reply <strong>HELP</strong> for help or
-                  contact{" "}
+                  <strong>Help:</strong> Reply <strong>HELP</strong>{" "}
+                  for help or contact{" "}
                   <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>
                 </li>
               </ul>
@@ -224,13 +224,19 @@ export default function TermsPage() {
             <section>
               <h2>Contact</h2>
               <p>Questions about these Terms may be sent to:</p>
-              <p>
-                <strong>FitStack AI</strong>
-                <br />
-                MDM Venture Labs LLC dba FitStack AI
-                <br />
-                Email: <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>
-              </p>
+              <address className="not-italic [&_p]:mb-0! space-y-1">
+                <p>
+                  <strong>FitStack AI</strong>
+                </p>
+                <p>MDM Venture Labs LLC dba FitStack AI</p>
+                <p>30 N Gould St Ste R</p>
+                <p>Sheridan, WY 82801</p>
+                <p>United States</p>
+                <p>
+                  Email:{" "}
+                  <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>
+                </p>
+              </address>
             </section>
           </div>
 

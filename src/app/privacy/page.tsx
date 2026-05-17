@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             </h1>
             <p className="text-sm text-gray-500">
               <span className="text-gray-400 font-medium">Effective date:</span>{" "}
-              April 11, 2026
+              May 16, 2026
             </p>
           </header>
 
@@ -121,8 +121,8 @@ export default function PrivacyPage() {
               </p>
               <p>
                 You can opt out of SMS messages at any time by replying{" "}
-                <strong>STOP</strong>. For help, reply <strong>HELP</strong> or
-                contact us at{" "}
+                <strong>STOP</strong>. For help, reply <strong>HELP</strong>{" "}
+                or contact us at{" "}
                 <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>.
               </p>
               <p>
@@ -231,13 +231,19 @@ export default function PrivacyPage() {
             <section>
               <h2>Contact</h2>
               <p>If you have questions about this Privacy Policy, contact:</p>
-              <p>
-                <strong>FitStack AI</strong>
-                <br />
-                MDM Venture Labs LLC dba FitStack AI
-                <br />
-                Email: <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>
-              </p>
+              <address className="not-italic [&_p]:mb-0! space-y-1">
+                <p>
+                  <strong>FitStack AI</strong>
+                </p>
+                <p>MDM Venture Labs LLC dba FitStack AI</p>
+                <p>30 N Gould St Ste R</p>
+                <p>Sheridan, WY 82801</p>
+                <p>United States</p>
+                <p>
+                  Email:{" "}
+                  <a href="mailto:hello@fitstack.ai">hello@fitstack.ai</a>
+                </p>
+              </address>
             </section>
           </div>
 
