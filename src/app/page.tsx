@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,25 +36,7 @@ function FadeIn({ children, className = "" }: { children: React.ReactNode; class
 export default function Home() {
   return (
     <main className="bg-navy text-white min-h-screen">
-      {/* NAV */}
-      <nav className="fixed top-0 w-full z-50 bg-navy/80 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Image
-            src="/logo.png"
-            alt="FitStack AI"
-            width={140}
-            height={36}
-            className="brightness-0 invert"
-            priority
-          />
-          <a
-            href="#contact"
-            className="hidden sm:inline-block text-sm font-medium px-5 py-2 rounded-full bg-electric hover:bg-electric-hover transition-colors"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </nav>
+      <SiteHeader />
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20 bg-gradient-to-b from-navy via-navy-light to-navy">
@@ -231,18 +214,7 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>&copy; 2026 FitStack AI. All rights reserved.</p>
-          <a
-            href="mailto:hello@fitstack.ai"
-            className="hover:text-electric transition-colors"
-          >
-            hello@fitstack.ai
-          </a>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
