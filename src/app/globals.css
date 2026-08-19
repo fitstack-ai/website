@@ -401,18 +401,61 @@ body {
   color: #fff;
 }
 
-.surface-pill {
-  align-items: center;
-  display: inline-flex;
-  gap: 0.65rem;
+.surface-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.surface-pill::before {
-  background: #60a5fa;
-  border-radius: 50%;
-  content: "";
-  height: 0.35rem;
-  width: 0.35rem;
+.surface-card {
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 42%),
+    rgba(10, 22, 40, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 14rem;
+  padding: 1.5rem;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.surface-card:hover {
+  border-color: rgba(96, 165, 250, 0.35);
+  transform: translateY(-2px);
+}
+
+.surface-icon {
+  align-items: center;
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  border-radius: 0.85rem;
+  color: #93c5fd;
+  display: inline-flex;
+  font-size: 1.15rem;
+  height: 2.75rem;
+  justify-content: center;
+  width: 2.75rem;
+}
+
+.surface-index {
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.surface-card h3 {
+  font-size: 1.1rem;
+  font-weight: 650;
+  margin-top: 2rem;
+}
+
+.surface-card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-top: 0.75rem;
 }
 
 .platform-domain {
@@ -719,6 +762,10 @@ body {
 }
 
 @media (max-width: 900px) {
+  .surface-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .platform-domain,
   .engagement-stage {
     grid-template-columns: 2.5rem 1fr;
@@ -751,7 +798,8 @@ body {
   }
 
   .proof-strip,
-  .form-grid {
+  .form-grid,
+  .surface-grid {
     grid-template-columns: 1fr;
   }
 

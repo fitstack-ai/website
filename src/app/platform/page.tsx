@@ -53,6 +53,39 @@ const domains = [
   },
 ];
 
+const surfaces = [
+  {
+    icon: "↗",
+    title: "Public experiences",
+    description: "Brand-controlled web, lead capture, offers, and conversion moments that begin a first-party relationship.",
+  },
+  {
+    icon: "⌘",
+    title: "HQ administration",
+    description: "Shared configuration, governance, reporting, and operating policy across every market and club.",
+  },
+  {
+    icon: "▦",
+    title: "Club operations",
+    description: "Local staff workflows and context for running the day-to-day member relationship consistently.",
+  },
+  {
+    icon: "◎",
+    title: "Member surfaces",
+    description: "Connected web, mobile, messaging, voice, and in-club experiences backed by one context layer.",
+  },
+  {
+    icon: "✦",
+    title: "Operating agents",
+    description: "Governed agents that act through approved tools, workflows, evaluation, and human handoff.",
+  },
+  {
+    icon: "↔",
+    title: "Integration layer",
+    description: "Durable contracts around systems of record, payments, communications, scheduling, analytics, and APIs.",
+  },
+];
+
 export default function PlatformPage() {
   return (
     <main className="bg-navy text-white">
@@ -63,11 +96,32 @@ export default function PlatformPage() {
         description="FitStack connects growth, service, commercial operations, and club delivery around shared identity, consent, context, and workflow."
       />
 
-      <section className="border-y border-white/10 bg-white/[0.025] px-6 py-16">
-        <div className="mx-auto flex max-w-7xl flex-wrap gap-x-10 gap-y-4 text-sm text-slate-300">
-          {["Public experiences", "HQ administration", "Club operations", "Member surfaces", "Operating agents", "Integration layer"].map((surface) => (
-            <span className="surface-pill" key={surface}>{surface}</span>
-          ))}
+      <section className="border-y border-white/10 bg-white/[0.025] px-6 py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-7 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div>
+              <p className="eyebrow">Where the platform shows up</p>
+              <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
+                Six connected surfaces. One owned platform.
+              </h2>
+            </div>
+            <p className="max-w-2xl text-base leading-relaxed text-slate-300 lg:justify-self-end sm:text-lg">
+              FitStack is more than a backend or a collection of screens. Each surface serves a distinct operator or member need while sharing the same identity, context, rules, and operating intelligence.
+            </p>
+          </div>
+
+          <div className="surface-grid mt-12">
+            {surfaces.map((surface, index) => (
+              <article className="surface-card" key={surface.title}>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="surface-icon" aria-hidden="true">{surface.icon}</span>
+                  <span className="surface-index">0{index + 1}</span>
+                </div>
+                <h3>{surface.title}</h3>
+                <p>{surface.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
