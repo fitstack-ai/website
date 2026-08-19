@@ -13,7 +13,7 @@ const navigation = [
 export function SiteHeader() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-navy/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
         <Link
           aria-label="FitStack AI — Home"
           className="inline-flex rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-bright/70"
@@ -22,10 +22,10 @@ export function SiteHeader() {
           <Image
             alt="FitStack AI"
             className="brightness-0 invert"
-            height={36}
+            height={30}
             priority
             src="/logo.png"
-            width={140}
+            width={117}
           />
         </Link>
 

@@ -44,7 +44,7 @@ export default async function InsightPage({ params }: PageProps) {
     <main className="bg-navy text-white">
       <SiteHeader />
       <article>
-        <header className="article-hero hero-grid px-6 pb-20 pt-36 sm:pb-28 sm:pt-44">
+        <header className="article-hero hero-grid px-6 pb-20 pt-40 sm:pb-28 sm:pt-48">
           <div className="mx-auto max-w-4xl">
             <Link className="text-link" href="/insights">← All insights</Link>
             <p className="eyebrow mt-12">{insight.category}</p>
