@@ -1,219 +1,269 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { SiteHeader } from "@/components/site-header";
+import Link from "next/link";
+import { CTA, NumberCard, SectionIntro, TextLink } from "@/components/marketing";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { insights } from "@/lib/insights";
 
-function useScrollReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("visible");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
+const architectureLayers = [
+  ["Experiences", "Member, staff, web, mobile, voice, SMS, and email"],
+  ["Operating intelligence", "Agents, deterministic workflows, tools, evaluation, and handoff"],
+  ["Context layer", "Identity, consent, member history, domain services, and data"],
+  ["Client-owned foundation", "Your repository, infrastructure, integrations, and roadmap"],
+];
 
-function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useScrollReveal();
-  return (
-    <div ref={ref} className={`fade-in ${className}`}>
-      {children}
-    </div>
-  );
-}
+const platformDomains = [
+  ["Acquire & understand", "Public experiences, identity, consent, profiles, signals, and audiences."],
+  ["Convert demand", "Lead pipelines, agent and staff workflows, scheduling, offers, and handoffs."],
+  ["Engage the lifecycle", "Campaigns, journeys, templates, notifications, and contextual conversations."],
+  ["Operate relationships", "Member records, staff workspaces, feedback, reputation, and service recovery."],
+  ["Run the commercial core", "Memberships, passes, services, agreements, billing, payments, and collections."],
+  ["Control access", "Clubs, areas, schedules, entitlements, access profiles, and exceptions."],
+];
+
+const factorySteps = ["Intent", "Task contract", "Parallel build", "Automated review", "Verification", "Deployment", "Learned pattern"];
 
 export default function Home() {
   return (
-    <main className="bg-navy text-white min-h-screen">
+    <main className="min-h-screen overflow-hidden bg-navy text-white">
       <SiteHeader />
 
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 pt-20 bg-gradient-to-b from-navy via-navy-light to-navy">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
-            AI-native operating
-            <br />
-            infrastructure for the
-            <br />
-            <span className="text-electric">fitness industry</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            We build the data and intelligence foundation gym operators
-            need to lead in the AI era.{" "}
-            <span className="text-white font-medium">
-              Interfaces evolve. Data endures.
-            </span>
-          </p>
-          <a
-            href="#contact"
-            className="inline-block text-lg font-semibold px-8 py-4 rounded-full bg-electric hover:bg-electric-hover transition-colors shadow-lg shadow-electric/20"
-          >
-            Get in Touch
-          </a>
+      <section className="hero-grid relative isolate flex min-h-[92vh] items-center px-6 pb-24 pt-32 sm:pt-40">
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="relative mx-auto grid w-full max-w-7xl gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div>
+            <p className="eyebrow mb-6">AI-native reference architecture for fitness</p>
+            <h1 className="max-w-5xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl md:text-7xl">
+              Own the platform that
+              <span className="block text-electric-bright">runs your business.</span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+              FitStack gives enterprise gym operators an owned operating platform—
+              complete with agents, integrations, workflows, and a software factory
+              built to keep evolving after the first deployment.
+            </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Link className="button-primary" href="/contact">Discuss your platform</Link>
+              <Link className="button-secondary" href="/architecture">Explore the architecture</Link>
+            </div>
+          </div>
+
+          <aside className="ownership-panel" aria-label="What your organization owns">
+            <div className="flex items-center justify-between border-b border-white/10 pb-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">What you own</p>
+              <span className="status-dot">Built to transfer</span>
+            </div>
+            <ul className="mt-3 divide-y divide-white/10">
+              {[
+                ["01", "The code and repository"],
+                ["02", "The data and context layer"],
+                ["03", "The infrastructure accounts"],
+                ["04", "The operating roadmap"],
+                ["05", "The capability to keep building"],
+              ].map(([number, item]) => (
+                <li className="flex items-center gap-5 py-5" key={item}>
+                  <span className="font-mono text-xs text-electric-bright">{number}</span>
+                  <span className="text-base text-slate-100 sm:text-lg">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </div>
-        {/* Subtle gradient fade at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-navy" />
       </section>
 
-      {/* PROBLEM / VISION */}
-      <section className="py-24 sm:py-32 px-6">
-        <FadeIn className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
-              <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4">
-                The Problem
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight">
-                Operators don't control their data.
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                Fragmented vendor stacks. Siloed systems. Every tool owns a
-                slice of your member data, but nobody owns the whole picture.
-                When AI agents arrive, operators without unified data will be
-                left behind.
-              </p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4">
-                Our Vision
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight">
-                One platform that owns the context layer.
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                FitStack unifies your data, operations, and member intelligence
-                into a single AI-native platform — giving you the foundation to
-                build custom experiences, deploy agents, and make decisions with
-                full context.
-              </p>
-            </div>
+      <section className="border-y border-white/10 bg-white/[0.025] px-6 py-12">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
+          <p className="text-2xl font-medium tracking-tight text-white sm:text-3xl">Not another SaaS layer.</p>
+          <p className="max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+            FitStack is a proven starting architecture plus forward-deployed expertise.
+            We adapt it to your organization, connect the systems worth keeping, and
+            embed a durable way to operate and improve the platform you own.
+          </p>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro
+            eyebrow="The executive case"
+            title="Technology becomes a strategic asset—not a stack of rented constraints."
+            description="FitStack connects platform decisions to the outcomes enterprise fitness leaders are accountable for."
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <NumberCard number="01" title="Strategic control">Own the roadmap beneath the member and operator experience.</NumberCard>
+            <NumberCard number="02" title="Connected growth">Turn acquisition, conversations, sales work, and lifecycle engagement into one operating loop.</NumberCard>
+            <NumberCard number="03" title="Economic leverage">Consolidate point workflows deliberately and keep vendor economics visible and direct.</NumberCard>
+            <NumberCard number="04" title="Faster adaptation">Use shared context and a repeatable factory to ship change without starting over.</NumberCard>
           </div>
-        </FadeIn>
+          <div className="mt-9"><TextLink href="/why-fitstack">See the case for ownership</TextLink></div>
+        </div>
       </section>
 
-      {/* HOW WE WORK */}
-      <section className="py-24 sm:py-32 px-6 bg-navy-light">
-        <FadeIn className="max-w-6xl mx-auto">
-          <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4 text-center">
-            How We Work
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6">
-            More than software. A complete transformation.
-          </h2>
-          <p className="text-gray-400 text-center max-w-2xl mx-auto mb-16 text-lg">
-            We don&apos;t just hand you a login. We bring decades of fitness and
-            technology expertise to every engagement — from strategy through
-            implementation.
-          </p>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Strategic Advisory",
-                desc: "Tech audits, vendor assessments, and data architecture roadmaps. We start by deeply understanding your operation — then chart the path forward.",
-              },
-              {
-                step: "02",
-                title: "Best Practices & Playbooks",
-                desc: "Proven frameworks for member experience, retention, and operational intelligence. Not theory — built from real operator engagements.",
-              },
-              {
-                step: "03",
-                title: "Platform & Starter Architecture",
-                desc: "Reference implementations and an AI-native foundation you own. Not another vendor lock-in — infrastructure you control and customize.",
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="bg-navy border border-white/10 rounded-2xl p-8 hover:border-electric/30 transition-colors"
-              >
-                <div className="text-electric text-sm font-mono font-bold mb-4">
-                  {card.step}
+      <section className="border-y border-white/10 bg-[#0d1c30] px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro
+            eyebrow="The platform"
+            title="One operating architecture across the member lifecycle."
+            description="Every domain shares identity, consent, context, and operational history—so staff, software, and agents can move the same outcome forward."
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-3">
+            {platformDomains.map(([title, description], index) => (
+              <article className="domain-cell" key={title}>
+                <span className="font-mono text-xs text-electric-bright">0{index + 1}</span>
+                <h3 className="mt-8 text-xl font-semibold text-white">{title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-slate-400 sm:text-base">{description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-9"><TextLink href="/platform">Explore the complete platform</TextLink></div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 sm:py-32">
+        <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="lg:sticky lg:top-32">
+            <SectionIntro
+              eyebrow="Architecture at a glance"
+              title="Context beneath every experience."
+              description="The interface can change without breaking the operating truth beneath it."
+            />
+            <div className="mt-8"><TextLink href="/architecture">Inspect the architecture</TextLink></div>
+          </div>
+          <div className="grid gap-3">
+            {architectureLayers.map(([label, detail], index) => (
+              <div className="architecture-row" key={label}>
+                <span className="architecture-index">0{index + 1}</span>
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{label}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-400 sm:text-base">{detail}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{card.desc}</p>
               </div>
             ))}
+            <div className="integration-rail">
+              <span>Systems of record</span><span>Payments</span><span>Communications</span><span>Specialist services</span>
+            </div>
           </div>
-        </FadeIn>
+        </div>
       </section>
 
-      {/* PRINCIPLES */}
-      <section className="py-24 sm:py-32 px-6">
-        <FadeIn className="max-w-6xl mx-auto">
-          <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4 text-center">
-            Built Different
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">
-            Three principles. Zero compromise.
-          </h2>
-          <div className="grid sm:grid-cols-3 gap-8">
+      <section className="px-6 py-24 sm:py-32">
+        <div className="agent-panel mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="eyebrow">Operating agents</p>
+              <h2 className="section-title mt-5">Agents that participate in the operation—not just the conversation.</h2>
+              <p className="mt-6 text-lg leading-relaxed text-slate-300">
+                Voice, SMS, email, and web agents work from shared context, call governed tools,
+                follow deterministic workflows, and hand off to people with the history intact.
+              </p>
+              <div className="mt-8"><TextLink href="/architecture#agents">See the operating-agent model</TextLink></div>
+            </div>
+            <div className="agent-sequence" aria-label="Operating agent sequence">
+              {["Understand context", "Choose a bounded action", "Use a governed tool", "Record the outcome", "Hand off when needed"].map((step, index) => (
+                <div className="agent-step" key={step}><span>0{index + 1}</span><p>{step}</p></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.025] px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro
+            eyebrow="The software factory"
+            title="The platform ships with a way to keep building it."
+            description="Repository-native instructions, skills, standards, work planning, automated review, and deployment turn hard-won practices into a repeatable delivery system."
+          />
+          <ol className="factory-flow mt-14">
+            {factorySteps.map((step, index) => (
+              <li key={step}><span>0{index + 1}</span><strong>{step}</strong></li>
+            ))}
+          </ol>
+          <div className="mt-9"><TextLink href="/software-factory">See how the factory works</TextLink></div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro
+            align="center"
+            eyebrow="A different ownership model"
+            title="A platform partner should make you more capable—not more dependent."
+          />
+          <div className="comparison-table mt-14">
+            <div className="comparison-head"><span>Traditional SaaS</span><span>FitStack</span></div>
             {[
-              {
-                title: "Data-First",
-                desc: "Your data is your competitive advantage. We treat it that way — unified, structured, and always under your control.",
-                icon: "◆",
-              },
-              {
-                title: "Agent-Ready",
-                desc: "Built for AI agents, not just human interfaces. When the UI disappears, your platform keeps working.",
-                icon: "◇",
-              },
-              {
-                title: "Context-Native",
-                desc: "Deep fitness industry intelligence baked into every layer. Not generic software with a gym skin — purpose-built.",
-                icon: "◈",
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="bg-navy border border-white/10 rounded-2xl p-8 hover:border-electric/30 transition-colors"
-              >
-                <div className="text-electric text-3xl mb-5">{card.icon}</div>
-                <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{card.desc}</p>
-              </div>
+              ["Access to a vendor product", "Ownership of a client-specific platform"],
+              ["Roadmap set for the market", "Roadmap aligned to your strategy"],
+              ["Data spread across product silos", "Shared context under your control"],
+              ["Configuration at the edges", "Code-level extension where it matters"],
+              ["Dependency grows over time", "Capability transfers over time"],
+            ].map(([traditional, fitstack]) => (
+              <div className="comparison-row" key={traditional}><span>{traditional}</span><span>{fitstack}</span></div>
             ))}
           </div>
-        </FadeIn>
+        </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="py-24 sm:py-32 px-6">
-        <FadeIn className="max-w-xl mx-auto text-center">
-          <p className="text-sm font-semibold text-electric uppercase tracking-widest mb-4">
-            Take Control
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Own your tech stack.
-            <br />
-            Stop letting it own you.
-          </h2>
-          <p className="text-gray-400 mb-10 text-lg leading-relaxed">
-            We help gym operators audit their tech stack, build a data strategy,
-            and deploy infrastructure they actually control. No vendor lock-in.
-            Your platform, your rules.
-          </p>
-          <a
-            href="mailto:hello@fitstack.ai?subject=Let's%20Talk"
-            className="inline-block px-10 py-4 rounded-full bg-electric hover:bg-electric-hover text-lg font-semibold transition-colors shadow-lg shadow-electric/20"
-          >
-            Get in Touch
-          </a>
-        </FadeIn>
+      <section className="border-y border-white/10 bg-[#0d1c30] px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionIntro
+            eyebrow="Forward deployed"
+            title="Start with the operation. Embed the architecture. Transfer the capability."
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              ["01", "Map", "Priorities, journeys, data, vendors, economics, and constraints."],
+              ["02", "Shape", "Modules, boundaries, ownership, outcomes, and delivery sequence."],
+              ["03", "Embed", "Client-owned deployment, integrations, agents, and live workflows."],
+              ["04", "Evolve", "Operate the factory, transfer capability, and improve continuously."],
+            ].map(([number, title, copy]) => (
+              <NumberCard key={title} number={number} title={title}>{copy}</NumberCard>
+            ))}
+          </div>
+          <div className="mt-9"><TextLink href="/how-we-work">See the engagement model</TextLink></div>
+        </div>
       </section>
 
+      <section className="px-6 py-24 sm:py-32">
+        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div>
+            <p className="eyebrow">Built from experience</p>
+            <h2 className="section-title mt-5">Fitness fluency meets platform engineering.</h2>
+            <p className="mt-6 text-lg leading-relaxed text-slate-300">
+              FitStack is led by a technologist with three decades building platforms,
+              more than two decades inside the fitness industry, and firsthand experience
+              building and successfully exiting a gym-management software business.
+            </p>
+            <div className="mt-8"><TextLink href="/about">Meet the builder behind FitStack</TextLink></div>
+          </div>
+          <div className="proof-strip">
+            <div><strong>30</strong><span>years building technology</span></div>
+            <div><strong>20+</strong><span>years in fitness</span></div>
+            <div><strong>1</strong><span>gym platform exit</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <SectionIntro eyebrow="Insights" title="Ideas for the AI-native fitness operator." />
+            <TextLink href="/insights">Read all insights</TextLink>
+          </div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {insights.map((insight) => (
+              <article className="insight-card" key={insight.slug}>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-electric-bright">{insight.category}</p>
+                <h3 className="mt-7 text-2xl font-semibold leading-tight tracking-tight text-white">{insight.title}</h3>
+                <p className="mt-5 text-sm leading-relaxed text-slate-400">{insight.description}</p>
+                <div className="mt-8"><TextLink href={`/insights/${insight.slug}`}>Read article</TextLink></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTA />
       <SiteFooter />
     </main>
   );

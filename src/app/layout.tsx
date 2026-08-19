@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "FitStack AI — AI-Native Operating Infrastructure for Fitness",
-  description:
-    "We build the data and intelligence foundation gym operators need to lead in the AI era. Interfaces evolve. Data endures.",
+  metadataBase: new URL("https://www.fitstack.ai"),
+  title: { default: "FitStack AI — Own the platform that runs your business", template: "%s" },
+  description: "An owned operating platform, delivered as an AI-native reference architecture for enterprise fitness operators.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any", media: "(prefers-color-scheme: light)" },
@@ -21,20 +18,36 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "FitStack AI",
-    description: "AI-native operating infrastructure for the fitness industry.",
+    title: "FitStack AI — Own the platform that runs your business",
+    description: "An owned operating platform, delivered as an AI-native reference architecture for enterprise fitness operators.",
     type: "website",
+    siteName: "FitStack AI",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "FitStack AI — Own the platform that runs your business." }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FitStack AI — Own the platform that runs your business",
+    description: "An owned operating platform, delivered as an AI-native reference architecture for enterprise fitness operators.",
+    images: ["/og.png"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "FitStack AI",
+  url: "https://www.fitstack.ai",
+  email: "hello@fitstack.ai",
+  description: "An owned operating platform, delivered as an AI-native reference architecture for enterprise fitness operators.",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased">{children}</body>
+    <html className={inter.variable} lang="en">
+      <body className="antialiased">
+        <script dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} type="application/ld+json" />
+        {children}
+      </body>
     </html>
   );
 }
