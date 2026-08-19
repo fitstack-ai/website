@@ -24,7 +24,8 @@ export default function ContactPage() {
             <p className="eyebrow">A useful first conversation</p>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight">No generic demo. No feature checklist.</h2>
             <p className="mt-5 leading-relaxed text-slate-300">We’ll focus on your business model, systems, data, ownership priorities, and the first member or operator journey worth proving.</p>
-            <a className="mt-8 inline-block text-link" href="mailto:hello@fitstack.ai">hello@fitstack.ai →</a>
+            <p className="mt-8 text-sm leading-relaxed text-slate-400">Prefer to write directly?</p>
+            <a className="mt-2 inline-block text-link" href="mailto:hello@fitstack.ai">hello@fitstack.ai →</a>
           </div>
           <ContactForm />
         </div>
