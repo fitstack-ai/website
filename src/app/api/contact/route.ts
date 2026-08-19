@@ -77,7 +77,7 @@ export async function POST(request: Request) {
   }
 
   const to = process.env.CONTACT_TO_EMAIL || "hello@fitstack.ai";
-  const from = process.env.RESEND_FROM_EMAIL || "FitStack Website <website@fitstack.ai>";
+  const from = process.env.RESEND_FROM_EMAIL || "FitStack Website <website@email.fitstack.ai>";
   const subject = `FitStack platform inquiry — ${organization}`;
   const text = [
     "New FitStack website inquiry",
