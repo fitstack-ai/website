@@ -2,84 +2,77 @@
 
 import { useState, type FormEvent } from "react";
 
-type ContactDraft = {
-  mailtoUrl: string;
-  outlookUrl: string;
-  message: string;
-};
+type SubmitState = "idle" | "sending" | "success" | "error";
 
 export function ContactForm() {
-  const [draft, setDraft] = useState<ContactDraft | null>(null);
-  const [copyStatus, setCopyStatus] = useState("");
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [message, setMessage] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") || "");
-    const email = String(form.get("email") || "");
-    const organization = String(form.get("organization") || "");
-    const role = String(form.get("role") || "");
-    const locations = String(form.get("locations") || "");
-    const priority = String(form.get("priority") || "");
-    const context = String(form.get("context") || "");
-    const subject = `FitStack platform discussion — ${organization}`;
-    const message = `Name: ${name}\nWork email: ${email}\nOrganization: ${organization}\nRole: ${role}\nLocations: ${locations || "Not provided"}\nPriority: ${priority}\n\nContext:\n${context || "Not provided"}`;
-    const encodedSubject = encodeURIComponent(subject);
-    const encodedMessage = encodeURIComponent(message);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-    setCopyStatus("");
-    setDraft({
-      mailtoUrl: `mailto:hello@fitstack.ai?subject=${encodedSubject}&body=${encodedMessage}`,
-      outlookUrl: `https://outlook.office.com/mail/deeplink/compose?to=hello%40fitstack.ai&subject=${encodedSubject}&body=${encodedMessage}`,
-      message: `${subject}\n\nTo: hello@fitstack.ai\n\n${message}`,
-    });
-  }
-
-  async function copyMessage() {
-    if (!draft) return;
+    setSubmitState("sending");
+    setMessage("");
 
     try {
-      await navigator.clipboard.writeText(draft.message);
-      setCopyStatus("Copied. Paste it into any email or message app.");
-    } catch {
-      setCopyStatus("Copy was blocked by the browser. Select the details above and copy them manually.");
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          context: String(form.get("context") || ""),
+          email: String(form.get("email") || ""),
+          locations: String(form.get("locations") || ""),
+          name: String(form.get("name") || ""),
+          organization: String(form.get("organization") || ""),
+          priority: String(form.get("priority") || ""),
+          role: String(form.get("role") || ""),
+          submissionId: crypto.randomUUID(),
+          website: String(form.get("website") || ""),
+        }),
+      });
+
+      const result = (await response.json().catch(() => ({}))) as { error?: string };
+      if (!response.ok) {
+        throw new Error(result.error || "The inquiry could not be delivered.");
+      }
+
+      formElement.reset();
+      setSubmitState("success");
+      setMessage("Your inquiry is on its way. We’ll follow up from hello@fitstack.ai.");
+    } catch (error) {
+      setSubmitState("error");
+      setMessage(error instanceof Error ? error.message : "The inquiry could not be delivered. Please try again.");
     }
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      <div className="contact-honeypot" aria-hidden="true">
+        <label>Website<input autoComplete="off" name="website" tabIndex={-1} /></label>
+      </div>
       <div className="form-grid">
-        <label>Your name<input autoComplete="name" name="name" required /></label>
-        <label>Work email<input autoComplete="email" name="email" required type="email" /></label>
-        <label>Organization<input autoComplete="organization" name="organization" required /></label>
-        <label>Your role<input autoComplete="organization-title" name="role" required /></label>
-        <label>Number of locations<input inputMode="numeric" min="1" name="locations" type="number" /></label>
+        <label>Your name<input autoComplete="name" maxLength={120} name="name" required /></label>
+        <label>Work email<input autoComplete="email" maxLength={254} name="email" required type="email" /></label>
+        <label>Organization<input autoComplete="organization" maxLength={160} name="organization" required /></label>
+        <label>Your role<input autoComplete="organization-title" maxLength={160} name="role" required /></label>
+        <label>Number of locations<input inputMode="numeric" max={100000} min="1" name="locations" type="number" /></label>
         <label>Primary priority<select defaultValue="" name="priority" required><option disabled value="">Choose one</option><option>Platform ownership and strategy</option><option>Growth, marketing, and sales</option><option>Agents and member experience</option><option>Data and integrations</option><option>Commercial core and operations</option><option>Software factory and delivery</option></select></label>
       </div>
-      <label>What should we understand?<textarea name="context" placeholder="The operating challenge, systems involved, and outcome that matters most." rows={6} /></label>
-      <button className="button-primary justify-self-start" type="submit">Prepare the conversation</button>
-
-      {draft ? (
-        <div className="contact-handoff" aria-live="polite">
-          <div>
-            <p className="text-sm font-semibold text-white">Your message is ready.</p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-400">Choose the route that works on this device. Your completed details are preserved in every option.</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a className="button-primary" href={draft.outlookUrl} rel="noreferrer" target="_blank">Open Outlook on the web</a>
-            <a className="button-secondary" href={draft.mailtoUrl}>Open default email app</a>
-            <button className="contact-copy" onClick={copyMessage} type="button">Copy message</button>
-          </div>
-          <details className="contact-preview">
-            <summary>Preview prepared message</summary>
-            <pre>{draft.message}</pre>
-          </details>
-          <p className="text-xs leading-relaxed text-slate-500">Nothing is sent until you review and send it from your chosen email app.</p>
-          {copyStatus ? <p className="text-sm text-electric-bright">{copyStatus}</p> : null}
-        </div>
-      ) : (
-        <p className="text-sm text-slate-400">We’ll prepare a pre-addressed message you can open in Outlook, your default email app, or copy anywhere.</p>
-      )}
+      <label>What should we understand?<textarea maxLength={5000} name="context" placeholder="The operating challenge, systems involved, and outcome that matters most." rows={6} /></label>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <button className="button-primary" disabled={submitState === "sending"} type="submit">
+          {submitState === "sending" ? "Sending…" : "Start the conversation"}
+        </button>
+        <p
+          aria-live="polite"
+          className={submitState === "success" ? "contact-status contact-status-success" : submitState === "error" ? "contact-status contact-status-error" : "contact-status"}
+          role={submitState === "error" ? "alert" : "status"}
+        >
+          {message || "Your inquiry is sent securely to the FitStack team."}
+        </p>
+      </div>
     </form>
   );
 }
